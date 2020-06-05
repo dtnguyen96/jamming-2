@@ -1,5 +1,6 @@
-import React from './node_modules/react';
-import "./TrackList.css"
+import React from 'react';
+import "./Tracklist.css"
+import {Track} from '../Track/Track'
 export class Tracklist extends React.Component {
     render() {
         return (
@@ -8,6 +9,6 @@ export class Tracklist extends React.Component {
                 return <Track track={track} key={track.id} />
             })}
             </div>
-        )
+        );
     }
 }
