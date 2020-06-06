@@ -10,17 +10,19 @@ class App extends React.Component {
       searchResults: [{ name: 'name1', artist: 'artist1', album: 'album1', id: 'id1' }],
       playlistName: 'My playlist',
       playlistTracks: [{ name: 'name2', artist: 'artist2', album: 'album2', id: 'id2' }]
-
     }
-    this.addTrack=this.addTrack.bind(this);
+    this.addTrack = this.addTrack.bind(this);
+  }
+  removeTrack(track){
+
   }
   //function add individuals song to the playlist
   addTrack(track) {
-    if (this.state.playlistTracks.find(savedTrack=>savedTrack.id===track.id)) {
+    if (this.state.playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
       return;
     }
     else {
-      this.playlistTracks.push(track)
+      this.state.playlistTracks.push(track)
     }
 
   }
