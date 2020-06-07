@@ -17,22 +17,23 @@ class App extends React.Component {
       { name: 'playlistName3', artist: 'playlistArtist3', album: 'playlistAlbum3', id: 6 }]
     }
     this.addTrack = this.addTrack.bind(this);
+    this.removeTrack=this.removeTrack.bind(this);
   }
   //function to add individuals track to the playlist
   addTrack(track) {
-    let tracks=this.state.playlistTracks;
+    let tracks = this.state.playlistTracks;
     if (this.state.playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
       return;
     }
     tracks.push(track);
-    this.setState({playlistTracks:tracks});
+    this.setState({ playlistTracks: tracks });
   }
   //function to remove individual track from the playlist
-  removeTrack(trackPassin){
-    let tracks=this.state.playlistTracks
-    tracks.filter(track => track.id === trackPassin.id)
-    this.setState({playlistTracks: tracks});
-    }
+  removeTrack(trackPassin) {
+    let tracks = this.state.playlistTracks
+  //keep the tracks that have different id than track passed in
+    tracks=tracks.filter(track => track.id != trackPassin.id)
+    this.setState({ playlistTracks: tracks });
   }
   render() {
     return (
@@ -42,7 +43,7 @@ class App extends React.Component {
           <SearchBar />
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
-            <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} />
+            <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} onRemove={this.removeTrack} />
           </div>
         </div>
       </div>
