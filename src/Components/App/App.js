@@ -18,18 +18,21 @@ class App extends React.Component {
     }
     this.addTrack = this.addTrack.bind(this);
   }
-  removeTrack(track){
-
-  }
-  //function add individuals song to the playlist
+  //function to add individuals track to the playlist
   addTrack(track) {
+    let tracks=this.state.playlistTracks;
     if (this.state.playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
       return;
     }
-    else {
-      this.state.playlistTracks.push(track)
+    tracks.push(track);
+    this.setState({playlistTracks:tracks});
+  }
+  //function to remove individual track from the playlist
+  removeTrack(trackPassin){
+    let tracks=this.state.playlistTracks
+    tracks.filter(track => track.id === trackPassin.id)
+    this.setState({playlistTracks: tracks});
     }
-
   }
   render() {
     return (
