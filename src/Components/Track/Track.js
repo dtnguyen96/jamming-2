@@ -5,14 +5,14 @@ export class Track extends React.Component {
         super(props);
         this.addTrack = this.addTrack.bind(this)
         this.handlingButton = this.handlingButton.bind(this)
-        this.removeTrack=this.removeTrack.bind(this)
+        this.removeTrack = this.removeTrack.bind(this)
     }
     //method to add this.props.track to the playlist
     addTrack() {
         this.props.onAdd(this.props.track);
     }
     //method to remove this.props.track from the playlist
-    removeTrack(){
+    removeTrack() {
         this.props.onRemove(this.props.track);
     }
     //method to decide '+' or '-' button appearance
@@ -31,7 +31,7 @@ export class Track extends React.Component {
                     <h3>{this.props.track.name}</h3>
                     <p>{this.props.track.artist + ' | ' + this.props.track.album}</p>
                 </div>
-            {this.handlingButton()}
+                {this.handlingButton()}
             </div>
         );
     }
