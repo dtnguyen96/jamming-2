@@ -2,7 +2,7 @@ const clientId = '52580a2556754c24b35f547cc6b21976';
 const redirectUri = 'http://localhost:3000/'
 let userAccessToken;
 //module to communitcate with Spotify API
-Spotify = {
+const Spotify = {
     //method to get get user access token
     getAccessToken() {
         if (userAccessToken) {
@@ -21,14 +21,31 @@ Spotify = {
             so the app doesn’t try grabbing the access token after it has expired */
             window.setTimeout(() => userAccessToken = '', expiresInMatch * 1000);
             window.history.pushState('Access Token', null, '/');
-            return userAccessToken
+            return userAccessToken;
         }
         else {
             //Else redirect user to the following URL
-            const accessUrl=`https://accounts.spotify.com/authorize?client_id=${clientId}&response_type
+            const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type
             =token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
-            window.location=accessUrl;
+            window.location = accessUrl;
         }
+    },
+    //method to return a promise that will eventually resolve to a list of tracks
+    search(userSearch) {
+        //get user Access Token
+        const userAccessToken = Spotify.getAccessToken();
+        //search spotify api, reolve in a list of tracks
+        return fetch(`https://api.spotify.com/v1/search?type=track&q=${userSearch}`, {
+            headers: { Authorization: `Bearer ${userAccessToken}` }
+        }).then(response => {
+            return response.json();
+        }).then(jsonResponse =>{
+            console.log(jsonResponse);
+            if(!jsonResponse.tracks){
+                // if there is no tracks, return an empty array
+                return [];
+            }
+        })
     }
 
 
