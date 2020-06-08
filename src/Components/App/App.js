@@ -3,7 +3,7 @@ import './App.css';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { SearchResults } from '../SearchResults/SearchResults'
 import { Playlist } from '../Playlist/Playlist.js'
-import {Spotify} from '../../util/Spotify'
+import spotify  from '../../util/Spotify'
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -51,7 +51,7 @@ class App extends React.Component {
   //method to retrieve data and search through Spotify API
   search(searchTerm){
     //Update state of searchResult with the resolved value of Spotify.search()'s promise
-    Spotify.search(searchTerm).then(searchResult=>{
+    spotify.search(searchTerm).then(searchResult=>{
       this.setState({searchResults: searchResult })
     });
 

@@ -1,10 +1,8 @@
-import { Tracklist } from "../Components/Tracklist/Tracklist";
-
 const clientId = '52580a2556754c24b35f547cc6b21976';
 const redirectUri = 'http://localhost:3000/'
 let userAccessToken;
 //module to communitcate with Spotify API
-const Spotify = {
+const spotify = {
     //method to get get user access token
     getAccessToken() {
         if (userAccessToken) {
@@ -35,7 +33,7 @@ const Spotify = {
     //method to return a promise that will eventually resolve to a list of tracks
     search(userSearch) {
         //get user Access Token
-        const userAccessToken = Spotify.getAccessToken();
+        const userAccessToken = spotify.getAccessToken();
         //search spotify api, reolve in a list of tracks
         return fetch(`https://api.spotify.com/v1/search?type=track&q=${userSearch}`, {
             headers: { Authorization: `Bearer ${userAccessToken}` }
@@ -48,18 +46,18 @@ const Spotify = {
                 return [];
             }
             // ELSE map the json object array to a javascript object 
-            return jsonResponse.tracks.items.map(track =>({
+            return jsonResponse.tracks.items.map(track => {
+                return {
                 id: track.id,
                 name: track.name,
                 artist: track.artist[0].name,
                 album: track.album.name,
-                uri=track.uri
-            })
-                
-            )
+                uri: track.uri
+                    }
+                })
         })
     }
 
 
 }
-export default Spotify;
+export default spotify;
