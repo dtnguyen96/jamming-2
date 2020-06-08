@@ -1,3 +1,5 @@
+import { Tracklist } from "../Components/Tracklist/Tracklist";
+
 const clientId = '52580a2556754c24b35f547cc6b21976';
 const redirectUri = 'http://localhost:3000/'
 let userAccessToken;
@@ -45,6 +47,16 @@ const Spotify = {
                 // if there is no tracks, return an empty array
                 return [];
             }
+            // ELSE map the json object array to a javascript object 
+            return jsonResponse.tracks.items.map(track =>({
+                id: track.id,
+                name: track.name,
+                artist: track.artist[0].name,
+                album: track.album.name,
+                uri=track.uri
+            })
+                
+            )
         })
     }
 
