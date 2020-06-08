@@ -48,9 +48,12 @@ class App extends React.Component {
     //generate an array of Spotify uri values from playlistTracks property
     const trackUris=this.state.playlistTracks.map(track=>track.uri);
   }
-  //method to retrieve and search through Spotify API
+  //method to retrieve data and search through Spotify API
   search(searchTerm){
-    console.log(searchTerm);
+    //Update state of searchResult with the resolved value of Spotify.search()'s promise
+    Spotify.search(searchTerm).then(searchResult=>{
+      this.setState({searchResults: searchResult })
+    });
 
   }
   render() {
