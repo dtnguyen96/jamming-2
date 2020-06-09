@@ -1,5 +1,5 @@
 const clientId = '52580a2556754c24b35f547cc6b21976';
-const redirectUri = 'http://localhost:3000/'
+const redirectUri = 'http://letsjamm.surge.sh/'
 let userAccessToken;
 //module to communitcate with Spotify API
 const spotify = {
