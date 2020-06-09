@@ -11,7 +11,8 @@ export class SearchBar extends React.Component {
     }
     //medthod to trigger App.js search method with searchBar state (user input) passed in 
     search() {
-        this.props.onSearch(this.state.term);
+        
+     this.state.term && this.props.onSearch(this.state.term);
     }
     //method to set searchBar state with user inpput
     handleTermChange(event){
